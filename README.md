@@ -24,7 +24,4 @@ It features a clean **glassmorphism UI**, responsive layout, and a distraction-f
 
 No frameworks. No libraries. Pure web technologies.
 
----
-
 ## 📂 Project Structure
-
