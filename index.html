@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AURORA - Premium Daily Task Tracker. Track, manage, and analyze your daily tasks with beautiful glassmorphism design. 100% offline, privacy-focused productivity tool.">
+    <meta name="keywords" content="task tracker, productivity, daily tasks, offline app, time management, goal tracking">
+    <meta name="author" content="AURORA Task Tracker">
+    <meta name="theme-color" content="#6366f1">
+    <meta property="og:title" content="AURORA | Premium Daily Task Tracker">
+    <meta property="og:description" content="Beautiful, offline-first daily task tracker with glassmorphism design and full-year planning.">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="data:application/json,{}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+    <title>AURORA | Premium Daily Task Tracker - Your Offline Productivity Companion</title>
+    
+</head>
+<body>
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <!-- Background Effects -->
+    <div class="bg-effects" aria-hidden="true"></div>
+    
+    <div class="container">
+        <!-- Main Header -->
+        <header class="main-header glass fade-in" role="banner">
+            <div class="branding">
+                <div class="logo" aria-hidden="true">
+                    <span>⚡</span>
+                </div>
+                <div class="brand-text">
+                    <h1>AURORA Task Tracker</h1>
+                    <p>Your premium daily productivity companion</p>
+                </div>
+            </div>
+            
+            <div class="current-week-display">
+                <div class="week-number" id="weekNumber">Week 0, 2024</div>
+                <div class="week-range" id="weekRange">Loading...</div>
+            </div>
+            
+            <nav class="nav-controls" aria-label="Week navigation">
+                <button class="btn btn-icon btn-secondary" id="prevWeek" aria-label="Previous week">
+                    <span aria-hidden="true">←</span>
+                </button>
+                <button class="btn btn-primary" id="todayBtn">
+                    <span aria-hidden="true">📅</span> Today
+                </button>
+                <button class="btn btn-icon btn-secondary" id="nextWeek" aria-label="Next week">
+                    <span aria-hidden="true">→</span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="dashboard-grid">
+            <!-- Week View Section -->
+            <section class="week-view-container glass fade-in" aria-labelledby="week-view-title">
+                <div class="week-header">
+                    <h2 id="week-view-title" class="section-title">
+                        <span class="week-icon" aria-hidden="true">📋</span>
+                        <span class="week-title-text">Weekly Task Overview</span>
+                        <span class="week-subtitle" id="weekRangeDisplay">Jan 1-7, 2024</span>
+                    </h2>
+                    
+                    <div class="week-controls">
+                        <button class="week-nav-btn prev-week" id="prevWeekBtn" aria-label="Previous week">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="week-today-btn" id="todayBtnMain">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM16 2v4M8 2v4M3 10h18"/>
+                            </svg>
+                            Today
+                        </button>
+                        <button class="week-nav-btn next-week" id="nextWeekBtn" aria-label="Next week">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Week Progress Bar -->
+                <div class="week-progress-container">
+                    <div class="week-progress-label">
+                        <span>Week Progress</span>
+                        <span class="week-progress-percent" id="weekProgressPercent">0%</span>
+                    </div>
+                    <div class="week-progress-bar">
+                        <div class="week-progress-fill" id="weekProgressFill"></div>
+                    </div>
+                </div>
+                
+                <!-- Week Grid - 2 Columns (4 + 3 days) -->
+                <div class="week-grid-layout">
+                    <!-- First Column (4 days) -->
+                    <div class="week-column week-column-1">
+                        <div class="column-header">
+                            <h3 class="column-title">First Half</h3>
+                            <div class="column-stats">
+                                <span class="column-stat completed" id="col1Completed">0</span>
+                                <span class="column-stat pending" id="col1Pending">0</span>
+                            </div>
+                        </div>
+                        <div class="week-grid week-grid-1" id="weekGrid1" role="list" aria-label="First half of the week">
+                            <!-- Days 1-4 will be dynamically generated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Second Column (3 days) -->
+                    <div class="week-column week-column-2">
+                        <div class="column-header">
+                            <h3 class="column-title">Second Half</h3>
+                            <div class="column-stats">
+                                <span class="column-stat completed" id="col2Completed">0</span>
+                                <span class="column-stat pending" id="col2Pending">0</span>
+                            </div>
+                        </div>
+                        <div class="week-grid week-grid-2" id="weekGrid2" role="list" aria-label="Second half of the week">
+                            <!-- Days 5-7 will be dynamically generated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Add Task -->
+                <div class="quick-add-container">
+                    <div class="quick-add-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        <span>Quick Add Task</span>
+                    </div>
+                    <div class="quick-add-form">
+                        <input 
+                            type="text" 
+                            class="quick-task-input" 
+                            id="quickTaskInput" 
+                            placeholder="What needs to be done today?"
+                            aria-label="Quick task input"
+                        >
+                        <button class="quick-add-btn" id="quickAddBtn" aria-label="Add task">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section glass fade-in" aria-labelledby="stats-title">
+                <h3 id="stats-title" class="section-title">
+                    <span aria-hidden="true">📈</span>
+                    Your Statistics
+                </h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="completedCount">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="missedCount">0</div>
+                        <div class="stat-label">Missed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="pendingCount">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCount">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity Section -->
+            <section class="activity-section glass fade-in" aria-labelledby="activity-title">
+                <h3 id="activity-title" class="section-title">
+                    <span aria-hidden="true">🔄</span>
+                    Recent Activity
+                </h3>
+                
+                <div class="activity-list" id="activityList" role="list" aria-label="Recent activities">
+                    <!-- Activity items will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Year Navigation -->
+            <aside class="year-navigation-section glass fade-in" aria-label="Year navigation">
+                <h3 class="section-title">
+                    <span aria-hidden="true">🗓️</span>
+                    2026 Navigation
+                </h3>
+                
+                <div class="year-navigation" id="yearNavigation" role="list" aria-label="Months of the year">
+                    <!-- Month buttons will be dynamically generated here -->
+                </div>
+            </aside>
+        </main>
+
+        <!-- Note Modal -->
+        <div class="modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle" class="modal-title">Reason for Missing Task</h2>
+                    <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalDescription" style="margin-bottom: 15px; color: var(--text-secondary);">
+                        Please provide a detailed explanation for why this task was not completed. This helps with accountability and future planning.
+                    </p>
+                    <textarea 
+                        id="noteTextarea" 
+                        placeholder="Example: Unexpected meeting ran late, had to prioritize other urgent tasks, will reschedule for tomorrow..."
+                        aria-label="Reason for missing task"
+                    ></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="cancelNote">Cancel</button>
+                    <button class="btn btn-primary" id="saveNote">Save Note</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer" role="contentinfo">
+            <p>© 2026 AURORA Task Tracker. All data is stored locally in your browser.</p>
+            <p>Use <kbd>Ctrl/Cmd + ←/→</kbd> to navigate weeks | <kbd>Ctrl/Cmd + T</kbd> for today</p>
+            <p>100% Offline • Privacy-Focused • No Data Collection</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html> 
